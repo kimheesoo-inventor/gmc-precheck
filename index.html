@@ -41,7 +41,7 @@
 <h1>Shopify store suspended in Google Merchant Center for Misrepresentation?</h1>
 <p class="lead">Send your store URL and, if you have it, the text of Google's notice. You get a free written list of what to fix on your public store pages before you ask Google for a review.</p>
 
-<a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSfqzoqP0eVGy7-lDQ_7PT7nq1zqAkh_lz_ElJmCfz88R26pRg/viewform" rel="noopener">Request a free pre-check</a>
+<a class="cta" data-step="/gmc-precheck/e/form-main/" href="https://docs.google.com/forms/d/e/1FAIpQLSfqzoqP0eVGy7-lDQ_7PT7nq1zqAkh_lz_ElJmCfz88R26pRg/viewform" rel="noopener">Request a free pre-check</a>
 <p class="small">Free. No password, no app install and no payment details needed. Prepared with an AI assistant.</p>
 
 <h2>Why check before you request a review</h2>
@@ -66,7 +66,7 @@
   <li>A mistyped email ending such as <code>.ccom</code>.</li>
 </ul>
 <p class="small">These are examples seen on public store pages. They are not a list of what Google flagged in any particular case, and not a measure of how common each one is.</p>
-<p>Prefer to check it yourself first? Use the free <a href="shopify-misrepresentation-checklist/">store-page checklist for Shopify</a>, which shows where to fix each item in Shopify admin. You can also read <a href="misrepresentation-threads-2026/">what 119 public Merchant Center Community threads show</a>. If the review button is missing or greyed out, see <a href="request-review-button-missing/">where Google says it is and why it can be missing</a>.</p>
+<p>Prefer to check it yourself first? Use the free <a href="/gmc-precheck/shopify-misrepresentation-checklist/">store-page checklist for Shopify</a>, which shows where to fix each item in Shopify admin. You can also read <a href="/gmc-precheck/misrepresentation-threads-2026/">what 119 public Merchant Center Community threads show</a>. If the review button is missing or greyed out, see <a href="/gmc-precheck/request-review-button-missing/">where Google says it is and why it can be missing</a>.</p>
 
 <h2>What you get</h2>
 <ol>
@@ -83,7 +83,7 @@
   <li>Not affiliated with Google or Shopify.</li>
 </ul>
 
-<a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSfqzoqP0eVGy7-lDQ_7PT7nq1zqAkh_lz_ElJmCfz88R26pRg/viewform" rel="noopener">Request a free pre-check</a>
+<a class="cta" data-step="/gmc-precheck/e/form-main/" href="https://docs.google.com/forms/d/e/1FAIpQLSfqzoqP0eVGy7-lDQ_7PT7nq1zqAkh_lz_ElJmCfz88R26pRg/viewform" rel="noopener">Request a free pre-check</a>
 
 <h2>Who runs this</h2>
 <p>Heesoo Kim, an independent operator in South Korea. An AI assistant that helps me run this project writes the pre-checks and sends the replies from my email. It uses the free, open-source <a href="https://kimheesoo-inventor.github.io/store-page-check/" rel="noopener">Store Page Check</a> tool, and the findings are compared with Google's published help pages.</p>
@@ -92,10 +92,30 @@
 <footer>
   <p>What you send through the form (store URL, email, Google's notice, anything you add) is used only to reply to your request. The form is hosted by Google Forms, and an AI assistant (an outside AI service) reads what you send to prepare the reply. It is not added to a mailing list or sold, and I delete it if you ask: email heesoo0204@gmail.com, reply to my email, or send the form again and write "delete my details" in the "Anything else I should know?" box.</p>
   <p>Not affiliated with Google or Shopify. Google Merchant Center and Shopify are trademarks of their owners.</p>
-  <p>This page counts visits with Cloudflare Web Analytics, which does not track you across other sites.</p>
+  <p>This page counts visits with Cloudflare Web Analytics, which does not track you across other sites. When you click a request form button, the page address changes to a short path ending in /e/form-.../ so that click is also counted as an anonymous page view; nothing you type is sent. Links in my emails may end in ?v= plus a short email-version label (the same label for everyone who got that version, not your name or address); the page moves that label into its address (/gmc-precheck/m/.../) so visits can be counted per email version.</p>
 </footer>
 
 </main>
+<script>
+/* Step count: clicking a request form button changes this page's address to a short path (/gmc-precheck/e/form-.../) so cookie-free Cloudflare Web Analytics counts the click as an anonymous page view. Nothing you type is sent. */
+(function () {
+  document.addEventListener('click', function (ev) {
+    var a = ev.target && ev.target.closest ? ev.target.closest('[data-step]') : null;
+    if (!a) return;
+    var p = a.getAttribute('data-step');
+    try { if (p && location.pathname !== p) history.pushState(null, '', p); } catch (e) {}
+  }, true);
+})();
+</script>
+<script>
+/* Email version label: ?v=... -> /gmc-precheck/m/.../ before analytics starts (see the note above). */
+(function () {
+  try {
+    var m = /[?&]v=(vg)(?:&|$)/i.exec(location.search);
+    if (m && location.pathname === '/gmc-precheck/') history.replaceState(null, '', '/gmc-precheck/m/' + m[1].toLowerCase() + '/' + location.hash);
+  } catch (e) {}
+})();
+</script>
 <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "4369363e9e4d4454afa4218085daeb0b"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
